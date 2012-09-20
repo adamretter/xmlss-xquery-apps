@@ -1,0 +1,187 @@
+/* CSS Document */
+
+body {
+    background: url("/exist/bfResources/images/bgOne.gif") repeat-x scroll;
+    margin: 30px;
+    padding: 0;
+    /* http://localhost:8080/exist/bfResources/images/bgOne.gif */
+}
+
+#header {
+    border-bottom: 2px solid #306098;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+#logo {
+    float: left;
+}
+
+#title {
+    float:left;
+    padding-left: 40px;
+    padding-top: 40px;
+}
+
+#links {
+    padding-top: 20pt;
+    padding-right: 20pt;
+    float: right;
+}
+
+#links span {
+    margin-top: 8pt;
+    margin-left: 8pt;
+    margin-right: 8pt;
+}
+
+#links span a {
+    font-weight: bold;
+}
+
+#searchSwitch {
+    height: 100px;
+}
+
+#results {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h1 {
+    padding-bottom: 8px;
+}
+
+#aTitle {
+    clear: both;
+}
+
+#articleTitle {
+    font-weight: bold;
+}
+
+.author {
+    display: block;
+}
+
+.abstract {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.articleRepeat {
+    margin-top: 10px;
+}
+
+.groupInRepeat {
+    padding: 10px;
+}
+
+.xfRepeatIndex {
+    background-color: #ffffff;
+}
+
+.authors {
+    font-style: italic;
+}
+
+.inlineText {
+    display: inline;
+}
+
+td {
+	font-family: Arial, Geneva, Helvetica, sans-serif;
+	font-size:12pt;
+}
+
+td.menu {
+	font-family: Arial, Geneva, Helvetica, sans-serif;
+	font-size:10pt;
+}
+
+a:link, a:visited {
+		text-decoration: none;
+		color: #306098;
+}
+
+a:hover {
+	text-decoration:underline;
+	color:#051E3A;
+}
+
+.text {
+	font-size : 09pt;
+	font-family: MerriamWebster;
+	color : #5E5D65;
+}
+
+.small{
+	font-size : 08pt;
+	font-family: MerriamWebster;
+	color : #474D68;
+}
+
+.text2{
+	font-size : 10px;
+	font-family: MerriamWebster;
+	color : #FFFFFF;
+}
+
+.text3{
+	font-size : 10px;
+	font-family: MerriamWebster;
+	color : #9B9999;
+}
+
+.fade{
+	font-size : 09px;
+	font-family: MerriamWebster;
+	color : #7B7E86;
+}
+
+.fade2{
+	font-size : 08pt;
+	font-family: MerriamWebster;
+	color : #7B7E86;
+}
+
+.text2_w{
+	font-size : 08pt;
+	font-family: MerriamWebster;
+	color : #C9D5DD;
+}
+
+.text3{
+	font-size : 07pt;
+	font-family: MerriamWebster;
+	color : #474D68;
+}
+
+.text4{
+	font-size : 9px;
+	font-family: MerriamWebster;
+	color : #474D68;
+}
+
+.text5{
+	font-size : 8px;
+	font-family: MerriamWebster;
+	color : #474D68;
+}
+
+.subhead{
+	font-size : 14pt;
+	font-family: MerriamWebster;
+	color : #5D4B7D;
+}
+
+.btn{
+   color:#306098;
+   font-family:'trebuchet ms',helvetica,sans-serif;
+   font-weight:bold;
+   margin-top:3pt;
+   border:1px solid;
+   border-top-color:#306098;
+   border-left-color:#306098;
+   border-right-color:#306098;
+   border-bottom-color:#306098;}

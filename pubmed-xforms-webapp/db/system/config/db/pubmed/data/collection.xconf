@@ -1,0 +1,6 @@
+<collection xmlns="http://exist-db.org/collection-config/1.0"><index>
+        <!-- journal --><create qname="Year" type="xs:integer"/><create qname="Month" type="xs:integer"/><create qname="Day" type="xs:integer"/><create qname="ISSN" type="xs:string"/><create qname="Title" type="xs:string"/><create qname="ArticleId" type="xs:integer"/><create qname="DescriptorName" type="xs:string"/><create qname="MajorTopicYN" type="xs:string"/><text qname="Title"/>
+        
+        <!-- author --><create qname="ForeName" type="xs:string"/><create qname="LastName" type="xs:string"/>
+        
+        <!-- article --><text qname="Abstract"><ignore qname="Affiliation"/></text><text qname="ArticleTitle"/></index></collection>

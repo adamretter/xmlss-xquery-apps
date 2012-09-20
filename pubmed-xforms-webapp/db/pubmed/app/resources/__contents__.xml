@@ -1,0 +1,15 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/pubmed/app/resources" owner="admin" group="dba" mode="755" created="2012-09-19T18:14:04+01:00" version="1">
+    <acl entries="0" version="1"/>
+    <resource type="BinaryResource" name="demostyle.css" owner="admin" group="dba" mode="644" created="2012-09-10T23:34:14+01:00" modified="2012-09-10T23:34:14+01:00" filename="demostyle.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="transp.gif" owner="admin" group="dba" mode="644" created="2012-09-10T23:36:03+01:00" modified="2012-09-10T23:36:03+01:00" filename="transp.gif" mimetype="image/gif">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="webster.css" owner="admin" group="dba" mode="644" created="2012-09-10T23:34:14+01:00" modified="2012-09-19T23:54:43+01:00" filename="webster.css" mimetype="text/css">
+        <acl entries="0" version="1"/>
+    </resource>
+    <resource type="BinaryResource" name="xss_04.jpg" owner="admin" group="dba" mode="644" created="2012-09-10T23:36:12+01:00" modified="2012-09-10T23:36:12+01:00" filename="xss_04.jpg" mimetype="image/jpeg">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>

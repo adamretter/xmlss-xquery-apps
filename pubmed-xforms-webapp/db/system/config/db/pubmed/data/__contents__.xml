@@ -1,0 +1,6 @@
+<collection xmlns="http://exist.sourceforge.net/NS/exist" name="/db/system/config/db/pubmed/data" owner="admin" group="dba" mode="755" created="2012-09-19T23:53:08+01:00" version="1">
+    <acl entries="0" version="1"/>
+    <resource type="XMLResource" name="collection.xconf" owner="admin" group="dba" mode="644" created="2012-09-19T23:53:22+01:00" modified="2012-09-19T23:53:22+01:00" filename="collection.xconf" mimetype="application/xml">
+        <acl entries="0" version="1"/>
+    </resource>
+</collection>
