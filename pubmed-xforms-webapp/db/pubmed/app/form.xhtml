@@ -1,1 +1,148 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xf="http://www.w3.org/2002/xforms"><head><xf:model><xf:instance xmlns=""><search><issn/><name/><exact>true</exact><author/><after-year/><start>1</start><count>10</count></search></xf:instance><xf:instance xmlns="" id="articles"><PubmedArticles/></xf:instance><xf:bind nodeset="exact" type="boolean"/><xf:submission id="searchIssn" method="get" replace="instance" instance="articles" serialization="none"><xf:resource value="concat('journal/', instance()/issn, '?count=', instance()/count, '&amp;start=', instance()/start)"/><xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message><xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message></xf:submission><xf:submission id="searchName" method="get" replace="instance" instance="articles" resource="journal"><xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message><xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message></xf:submission><xf:submission id="searchArticle" method="get" replace="instance" instance="articles" resource="article"><xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message><xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message></xf:submission></xf:model></head><body><div><div id="search"><xf:group><xf:label><h1>Search Articles</h1></xf:label><div style="display:none;"><xf:trigger id="t-case1"><xf:label>By ISSN</xf:label><xf:toggle case="case1"/></xf:trigger><xf:trigger id="t-case2"><xf:label>Case 2</xf:label><xf:toggle case="case2"/></xf:trigger></div><xf:switch id="searchSwitch" appearance="dijit:TabContainer"><xf:label>Search</xf:label><xf:case id="case1" selected="true"><xf:label>By ISSN</xf:label><div><xf:input ref="issn" incremental="true"><xf:label>ISSN:</xf:label><xf:hint>Search for Articles by Journal ISSN</xf:hint></xf:input><xf:trigger><xf:label>Search</xf:label><xf:action ev:event="DOMActivate"><xf:send submission="searchIssn"/></xf:action></xf:trigger></div></xf:case><xf:case id="case2"><xf:label>By Journal Name</xf:label><div><xf:input ref="name" incremental="true"><xf:label>Journal Name:</xf:label><xf:hint>Search for Articles by Journal Name</xf:hint></xf:input><xf:input ref="exact"><xf:label>Exact Match?</xf:label><xf:hint>Determines if the Journal Name must be an exact or partial match</xf:hint></xf:input><xf:trigger><xf:label>Search</xf:label><xf:action ev:event="DOMActivate"><xf:send submission="searchName"/></xf:action></xf:trigger></div></xf:case><xf:case id="case3"><xf:label>By Author Name</xf:label><div><xf:input ref="author" incremental="true"><xf:label>Author Name:</xf:label><xf:hint>Search for Articles by Author Name</xf:hint></xf:input><xf:trigger><xf:label>Search</xf:label><xf:action ev:event="DOMActivate"><xf:send submission="searchArticle"/></xf:action></xf:trigger></div></xf:case><xf:case id="case4"><xf:label>By Date</xf:label><div><xf:input ref="after-year" incremental="true"><xf:label>After Year:</xf:label><xf:hint>Search for Articles in or after Year</xf:hint></xf:input><xf:trigger><xf:label>Search</xf:label><xf:action ev:event="DOMActivate"><xf:send submission="searchArticle"/></xf:action></xf:trigger></div></xf:case></xf:switch></xf:group></div><div id="results"><xf:group><xf:label><h1>Results</h1></xf:label><xf:repeat id="articleRepeat" nodeset="instance('articles')/PubmedArticle" class="articleRepeat" appearance="compact"><xf:group class="groupInRepeat"><xf:output value="concat(count(preceding-sibling::*) + 1, '.')"/></xf:group><xf:group class="groupInRepeat"><xf:output value="concat('&lt;a href=&#34;article/', PubmedData/ArticleIdList/ArticleId[@IdType = 'pubmed'], '&#34;&gt;', MedlineCitation/Article/ArticleTitle, '&lt;/a&gt;')" mediatype="text/html"/><xf:output class="authors" value="string-join(MedlineCitation/Article/AuthorList/Author/concat(FirstName, ' ', LastName), ', ')"/><xf:output value="concat(substring(MedlineCitation/Article/Abstract/AbstractText, 1, 400), '...')"/></xf:group></xf:repeat></xf:group></div></div></body></html>
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+        <xf:model>
+            <xf:instance xmlns="">
+                <search>
+                    <issn/>
+                    <name/>
+                    <exact>true</exact>
+                    <author/>
+                    <after-year/>
+                    <start>1</start>
+                    <count>10</count>
+                </search>
+            </xf:instance>
+            <xf:instance xmlns="" id="articles">
+                <PubmedArticles/>
+            </xf:instance>
+            <xf:bind nodeset="exact" type="boolean"/>
+            <xf:submission id="searchIssn" method="get" replace="instance" instance="articles" serialization="none">
+                <xf:resource value="concat('journal/', instance()/issn, '?count=', instance()/count, '&amp;start=', instance()/start)"/>
+                <xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message>
+                <xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message>
+            </xf:submission>
+            <xf:submission id="searchName" method="get" replace="instance" instance="articles" resource="journal">
+                <xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message>
+                <xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message>
+            </xf:submission>
+            <xf:submission id="searchArticle" method="get" replace="instance" instance="articles" resource="article">
+                <xf:message ev:event="xforms-submit-done" level="ephemeral">Search completed.</xf:message>
+                <xf:message ev:event="xforms-submit-error" level="ephemeral">An error occurred.</xf:message>
+            </xf:submission>
+        </xf:model>
+    </head>
+    <body>
+        <div>
+            <div id="search">
+                <xf:group>
+                    <xf:label>
+                        <h1>Search Articles</h1>
+                    </xf:label>
+                    <div style="display:none;">
+                        <xf:trigger id="t-case1">
+                            <xf:label>By ISSN</xf:label>
+                            <xf:toggle case="case1"/>
+                        </xf:trigger>
+                        <xf:trigger id="t-case2">
+                            <xf:label>Case 2</xf:label>
+                            <xf:toggle case="case2"/>
+                        </xf:trigger>
+                        <xf:trigger id="t-case3">
+                            <xf:label>Case 3</xf:label>
+                            <xf:toggle case="case3"/>
+                        </xf:trigger>
+                        <xf:trigger id="t-case4">
+                            <xf:label>Case 4</xf:label>
+                            <xf:toggle case="case4"/>
+                        </xf:trigger>
+                    </div>
+                    <xf:switch id="searchSwitch" appearance="dijit:TabContainer">
+                        <xf:label>Search</xf:label>
+                        <xf:case id="case1" selected="true">
+                            <xf:label>By ISSN</xf:label>
+                            <div>
+                                <xf:input ref="issn" incremental="true">
+                                    <xf:label>ISSN:</xf:label>
+                                    <xf:hint>Search for Articles by Journal ISSN</xf:hint>
+                                </xf:input>
+                                <xf:trigger>
+                                    <xf:label>Search</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:send submission="searchIssn"/>
+                                    </xf:action>
+                                </xf:trigger>
+                            </div>
+                        </xf:case>
+                        <xf:case id="case2">
+                            <xf:label>By Journal Name</xf:label>
+                            <div>
+                                <xf:input ref="name" incremental="true">
+                                    <xf:label>Journal Name:</xf:label>
+                                    <xf:hint>Search for Articles by Journal Name</xf:hint>
+                                </xf:input>
+                                <xf:input ref="exact">
+                                    <xf:label>Exact Match?</xf:label>
+                                    <xf:hint>Determines if the Journal Name must be an exact or partial match</xf:hint>
+                                </xf:input>
+                                <xf:trigger>
+                                    <xf:label>Search</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:send submission="searchName"/>
+                                    </xf:action>
+                                </xf:trigger>
+                            </div>
+                        </xf:case>
+                        <xf:case id="case3">
+                            <xf:label>By Author Name</xf:label>
+                            <div>
+                                <xf:input ref="author" incremental="true">
+                                    <xf:label>Author Name:</xf:label>
+                                    <xf:hint>Search for Articles by Author Name</xf:hint>
+                                </xf:input>
+                                <xf:trigger>
+                                    <xf:label>Search</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:send submission="searchArticle"/>
+                                    </xf:action>
+                                </xf:trigger>
+                            </div>
+                        </xf:case>
+                        <xf:case id="case4">
+                            <xf:label>By Date</xf:label>
+                            <div>
+                                <xf:input ref="after-year" incremental="true">
+                                    <xf:label>After Year:</xf:label>
+                                    <xf:hint>Search for Articles in or after Year</xf:hint>
+                                </xf:input>
+                                <xf:trigger>
+                                    <xf:label>Search</xf:label>
+                                    <xf:action ev:event="DOMActivate">
+                                        <xf:send submission="searchArticle"/>
+                                    </xf:action>
+                                </xf:trigger>
+                            </div>
+                        </xf:case>
+                    </xf:switch>
+                </xf:group>
+            </div>
+            <div id="results">
+                <xf:group>
+                    <xf:label>
+                        <h1>Results</h1>
+                    </xf:label>
+                    <xf:repeat id="articleRepeat" nodeset="instance('articles')/PubmedArticle" class="articleRepeat" appearance="compact">
+                        <xf:group class="groupInRepeat">
+                            <xf:output value="concat(count(preceding-sibling::*) + 1, '.')"/>
+                        </xf:group>
+                        <xf:group class="groupInRepeat">
+                            <xf:output value="concat('&lt;a href=&#34;article/', PubmedData/ArticleIdList/ArticleId[@IdType = 'pubmed'], '&#34;&gt;', MedlineCitation/Article/ArticleTitle, '&lt;/a&gt;')" mediatype="text/html"/>
+                            <xf:output class="authors" value="string-join(MedlineCitation/Article/AuthorList/Author/concat(FirstName, ' ', LastName), ', ')"/>
+                            <xf:output value="concat(substring(MedlineCitation/Article/Abstract/AbstractText, 1, 400), '...')"/>
+                        </xf:group>
+                    </xf:repeat>
+                </xf:group>
+            </div>
+        </div>
+    </body>
+</html>
