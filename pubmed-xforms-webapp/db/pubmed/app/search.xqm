@@ -7,6 +7,7 @@ import module namespace web = "http://xmlss/web" at "web.xqm";
 declare namespace rest = "http://exquery.org/ns/restxq";
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
+
 declare
     %rest:GET
     %rest:path("/pubmed/search")
@@ -23,16 +24,17 @@ declare
     %rest:path("/pubmed/journal/{$issn}")
     %rest:query-param("start", "{$start}", 1)
     %rest:query-param("count", "{$count}", 10)
-function search:by-journal-issn($issn, $start as xs:int, $count as xs:int) {
+function search:by-journal-issn($issn as xs:string, $start as xs:integer*, $count as xs:integer*) {
     <PubmedArticles>
     {
         collection("/db/pubmed/data")/PubmedArticleSet/PubmedArticle
             [MedlineCitation/Article/Journal/ISSN eq $issn]
-            [position() ge $start]
-            [position() lt $start + $count] 
+            [position() ge $start[1]]
+            [position() lt $start[1] + $count[1]] 
     }
     </PubmedArticles>
 };
+
 
 declare
     %rest:GET
@@ -41,16 +43,16 @@ declare
     %rest:query-param("exact", "{$exact}")
     %rest:query-param("start", "{$start}", 1)
     %rest:query-param("count", "{$count}", 10)
-function search:by-journal-name($name, $exact, $start as xs:integer, $count as xs:integer) {
+function search:by-journal-name($name, $exact, $start as xs:integer*, $count as xs:integer*) {
     <PubmedArticles>
     {
         if($exact and $exact eq "false")then
             (: fulltext match :)
-            search:by-journal-name-ft($name, $start, $count)
+            search:by-journal-name-ft($name, $start[1], $count[1])
         
         else
             (: exact match :)
-            search:by-journal-name-exact($name, $start, $count)
+            search:by-journal-name-exact($name, $start[1], $count[1])
     }
     </PubmedArticles>
 };
@@ -62,17 +64,17 @@ declare
     %rest:query-param("after-year", "{$after-year}")
     %rest:query-param("start", "{$start}", 1)
     %rest:query-param("count", "{$count}", 10)
-function search:by-article($author, $after-year as xs:integer, $start as xs:integer, $count as xs:integer) {
+function search:by-article($author, $after-year as xs:integer*, $start as xs:integer*, $count as xs:integer*) {
     <PubmedArticles>
     {    
         if($author)then
-            search:by-author($author, $start, $count)
+            search:by-author($author[1], $start[1], $count[1])
         
         else if($after-year) then
-            search:by-date($after-year, $start, $count)
+            search:by-date($after-year[1], $start[1], $count[1])
         else
             (: all articles! :)
-            search:list-articles($start, $count)
+            search:list-articles($start[1], $count[1])
     }
     </PubmedArticles>
 };
@@ -82,10 +84,9 @@ declare
     %rest:path("/pubmed/article/{$pubmedid}")
     %rest:produces("text/html")
     %output:method("html")
-function search:article-html($pubmedid as xs:integer) {
+function search:article-html($pubmedid) {
     let $article := collection("/db/pubmed/data")/PubmedArticleSet/PubmedArticle[descendant::ArticleId eq $pubmedid]
     return
-    
         web:page(web:view-article-page($article))
 };
 
@@ -102,7 +103,7 @@ function search:article($pubmedid as xs:integer) {
 
 declare function search:by-journal-name-exact($name, $start, $count) {
     collection("/db/pubmed/data")/PubmedArticleSet/PubmedArticle
-        [MedlineCitation/Article/Journal/Title eq $name]
+        [MedlineCitation/Article/Journal/Title eq $name]           (: TODO: not yet optimised! :)
         [position() ge $start]
         [position() lt $start + $count]
 };
@@ -116,7 +117,7 @@ declare function search:by-journal-name-ft($name, $start, $count) {
 
 declare function search:by-author($author, $start, $count) {
   collection("/db/pubmed/data")/PubmedArticleSet/PubmedArticle
-    [(descendant::ForeName, descendant::LastName) = $author]
+    [(descendant::ForeName, descendant::LastName) = $author]        (: TODO: not yet optimised! :)
     [position() ge $start]
     [position() lt $start + $count]
 };
